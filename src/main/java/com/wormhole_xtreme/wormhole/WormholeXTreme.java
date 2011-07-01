@@ -329,6 +329,13 @@ public class WormholeXTreme extends JavaPlugin
     public void onEnable()
     {
         prettyLog(Level.INFO, true, "Enable Beginning.");
+
+        if ( !ConfigManager.isWormholeWorldsSupportEnabled())
+        {
+            prettyLog(Level.INFO, true, "Wormhole Worlds support disabled in settings.txt, loading stargates and worlds ourself.");
+            StargateDBManager.loadStargates(getThisPlugin().getServer());
+        }
+
         // Try and attach to Permissions and iConomy and Help
         try
         {
@@ -372,11 +379,6 @@ public class WormholeXTreme extends JavaPlugin
         DBUpdateUtil.updateDB();
         // Load our shapes, stargates, and internal permissions.
         StargateHelper.loadShapes();
-        if ( !ConfigManager.isWormholeWorldsSupportEnabled())
-        {
-            prettyLog(Level.INFO, true, "Wormhole Worlds support disabled in settings.txt, loading stargates and worlds ourself.");
-            StargateDBManager.loadStargates(getThisPlugin().getServer());
-        }
         PermissionsManager.loadPermissions();
         prettyLog(Level.INFO, true, "Load Completed.");
     }
