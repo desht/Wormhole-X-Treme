@@ -377,7 +377,8 @@ class WormholeXTremePlayerListener extends PlayerListener
                 player.setNoDamageTicks(5);
                 event.setFrom(stargate.getGatePlayerTeleportLocation());
                 event.setTo(stargate.getGatePlayerTeleportLocation());
-                player.teleport(stargate.getGatePlayerTeleportLocation());
+		// desht: this will get the player kicked in recent Bukkit builds
+                //player.teleport(stargate.getGatePlayerTeleportLocation());
                 return true;
             }
 
@@ -385,7 +386,8 @@ class WormholeXTremePlayerListener extends PlayerListener
             player.setNoDamageTicks(5);
             event.setFrom(target);
             event.setTo(target);
-            player.teleport(target);
+	    // desht: this will get the player kicked in recent Bukkit builds
+            //player.teleport(target);
             if (target != stargate.getGatePlayerTeleportLocation())
             {
                 WormholeXTreme.getThisPlugin().prettyLog(Level.INFO, false, player.getName() + " used wormhole: " + stargate.getGateName() + " to go to: " + stargate.getGateTarget().getGateName());
@@ -464,7 +466,8 @@ class WormholeXTremePlayerListener extends PlayerListener
     {
         if (handlePlayerMoveEvent(event))
         {
-            event.setCancelled(true);
+            // desht: we no longer cancel this event - CB 935+ compatibility
+            //event.setCancelled(true);
         }
     }
 }
